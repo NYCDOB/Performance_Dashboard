@@ -285,7 +285,8 @@ svg.nvd3-svg {
 
 
 .nvd3 text {
-    font: normal 13px Lato;
+    font: normal 13px;
+    font-family: 'Lato', sans-serif;
 }
 
 
