@@ -47,80 +47,63 @@
 
 
 <script>
-    var testdata = [
-        {key: "One", y: 5},
-        {key: "Two", y: 2},
-        {key: "Three", y: 9},
-        {key: "Four", y: 7},
-        {key: "Five", y: 4},
-        {key: "Six", y: 3},
-        {key: "Seven", y: 0.5}
+  //Donut chart example
+nv.addGraph(function() {
+  var chart = nv.models.pieChart()
+      .x(function(d) { return d.label })
+      .y(function(d) { return d.value })
+      .showLabels(true)     //Display pie labels
+      .labelThreshold(.05)  //Configure the minimum slice size for labels to show up
+      .labelType("percent") //Configure what type of data to show in the label. Can be "key", "value" or "percent"
+      .donut(true)          //Turn on Donut mode. Makes pie chart look tasty!
+      .donutRatio(0.35)     //Configure how big you want the donut hole size to be.
+      ;
+
+    d3.select("#chart2 svg")
+        .datum(exampleData())
+        .transition().duration(350)
+        .call(chart);
+
+  return chart;
+});
+
+//Pie chart example data. Note how there is only a single array of key-value pairs.
+function exampleData() {
+  return  [
+      { 
+        "label": "One",
+        "value" : 29.765957771107
+      } , 
+      { 
+        "label": "Two",
+        "value" : 0
+      } , 
+      { 
+        "label": "Three",
+        "value" : 32.807804682612
+      } , 
+      { 
+        "label": "Four",
+        "value" : 196.45946739256
+      } , 
+      { 
+        "label": "Five",
+        "value" : 0.19434030906893
+      } , 
+      { 
+        "label": "Six",
+        "value" : 98.079782601442
+      } , 
+      { 
+        "label": "Seven",
+        "value" : 13.925743130903
+      } , 
+      { 
+        "label": "Eight",
+        "value" : 5.1387322875705
+      }
     ];
-    var height = 350;
-    var width = 350;
-    var chart1;
-    nv.addGraph(function() {
-        var chart1 = nv.models.pieChart()
-            .x(function(d) { return d.key })
-            .y(function(d) { return d.y })
-            .donut(true)
-            .width(width)
-            .height(height)
-            .padAngle(.08)
-            .cornerRadius(5)
-            .id('donut1'); // allow custom CSS for this one svg
-        chart1.title("100%");
-        chart1.pie.donutLabelsOutside(true).donut(true);
-        d3.select("#test1")
-            .datum(testdata)
-            .transition().duration(1200)
-            .call(chart1);
-        // LISTEN TO WINDOW RESIZE
-        // nv.utils.windowResize(chart1.update);
-        // LISTEN TO CLICK EVENTS ON SLICES OF THE PIE/DONUT
-        // chart.pie.dispatch.on('elementClick', function() {
-        //     code...
-        // });
-        // chart.pie.dispatch.on('chartClick', function() {
-        //     code...
-        // });
-        // LISTEN TO DOUBLECLICK EVENTS ON SLICES OF THE PIE/DONUT
-        // chart.pie.dispatch.on('elementDblClick', function() {
-        //     code...
-        // });
-        // LISTEN TO THE renderEnd EVENT OF THE PIE/DONUT
-        // chart.pie.dispatch.on('renderEnd', function() {
-        //     code...
-        // });
-        // OTHER EVENTS DISPATCHED BY THE PIE INCLUDE: elementMouseover, elementMouseout, elementMousemove
-        // @see nv.models.pie
-        return chart1;
-    });
-    var chart2;
-    nv.addGraph(function() {
-        var chart2 = nv.models.pieChart()
-            .x(function(d) { return d.key })
-            .y(function(d) { return d.y })
-            //.labelThreshold(.08)
-            //.showLabels(false)
-            .color(d3.scale.category20().range().slice(10))
-            .width(width)
-            .height(height)
-            .donut(true)
-            .id('donut2')
-            .titleOffset(-30)
-            .title("woot");
-        // MAKES IT HALF CIRCLE
-        chart2.pie
-            .startAngle(function(d) { return d.startAngle/2 -Math.PI/2 })
-            .endAngle(function(d) { return d.endAngle/2 -Math.PI/2 });
-        d3.select("#test2")
-            //.datum(historicalBarChart)
-            .datum(testdata)
-            .transition().duration(1200)
-            .call(chart2);
-        return chart2;
-    });
+}
 </script>
 </body>
 </html>
