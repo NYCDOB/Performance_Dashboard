@@ -77,9 +77,9 @@
     chart.yAxis
         .axisLabel('')
 		.axisLabelDistance(-10)
-         //.tickFormat(d3.format('.2s'))
+         .tickFormat(d3.format('.0f'))
          .ticks(8);
-    //chart.valueFormat(d3.format('.3s'));
+    chart.valueFormat(d3.format('.0f'));
         d3.select('#chart1 svg')
             .datum(historicalBarChart)
             .call(chart);
