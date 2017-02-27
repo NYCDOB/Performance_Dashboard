@@ -120,6 +120,7 @@
     nv.addGraph(function() {
         var chart = nv.models.multiBarChart()
         .showControls(false)
+        .margin({bottom: 100}) 
         .stacked(true);
 
         chart.yAxis
